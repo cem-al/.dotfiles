@@ -11,6 +11,11 @@
         },
         "movement": {
             "mode": "cursor"
+        },
+        "views": {
+            "log": {
+                "time-column": "disabled"
+            }
         }
     },
     "log": {
@@ -22,6 +27,11 @@
                 "description": "Convert a vmacore backtrace into human-readable text",
                 "condition": ":log_body LIKE '%[context]%[/context]%'",
                 "handler": "com.vmware.btresolver.py"
+            },
+            "org.postgresql.statement-error": {
+                "description": "statement error",
+                "condition": ":log_level COLLATE loglevel >= 'error' AND :log_body LIKE '% at character %' AND :log_format IN ('postgres_log', 'vpostgres_log')",
+                "handler": "|pg-annotate-errors"
             }
         },
         "demux": {
@@ -35,6 +45,14 @@
             "container-with-type": {
                 "enabled": false,
                 "pattern": "^(?<mux_id>[a-zA-Z][\\w\\-]{3,}) (?<container_type>[a-zA-Z][\\w\\-]{3,}) (?<body>.*)"
+            }
+        },
+        "demux-json": {
+            "graylog": {
+                "enabled": false,
+                "timestamp": "timestamp",
+                "mux_id": "source",
+                "body": "message"
             }
         }
     },
@@ -117,6 +135,22 @@
                 "XDG": {
                     "test": "command -v xdg-open",
                     "command": "xdg-open"
+                }
+            }
+        },
+        "external-editor": {
+            "impls": {
+                "VSCode": {
+                    "test": "command -v code",
+                    "command": "env VSCODE_PWD=\"$PWD\" code \"$FILE_PATH\""
+                },
+                "VSCode.app": {
+                    "test": "command -v '/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code'",
+                    "command": "env VSCODE_PWD=\"$PWD\" '/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code' \"$FILE_PATH\""
+                },
+                "zzz.MacOS": {
+                    "test": "command -v open",
+                    "command": "open -t \"$FILE_PATH\""
                 }
             }
         },

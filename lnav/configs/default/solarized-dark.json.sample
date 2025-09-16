@@ -35,6 +35,11 @@
                     "selected-text": {
                         "background-color": "$cyan"
                     },
+                    "fuzzy-match": {
+                        "color": "$orange",
+                        "underline": true,
+                        "bold": true
+                    },
                     "alt-text": {
                         "background-color": "$base02"
                     },
@@ -60,13 +65,15 @@
                     },
                     "cursor-line": {
                         "color": "$cyan",
-                        "background-color": "$red",
-                        "bold": true,
-                        "underline": true
+                        "background-color": "$base02",
+                        "bold": true
                     },
                     "disabled-cursor-line": {
                         "color": "$cyan",
                         "background-color": "#5f005f"
+                    },
+                    "time-column": {
+                        "background-color": "$base02"
                     },
                     "adjusted-time": {
                         "color": "$magenta"
@@ -85,7 +92,11 @@
                     },
                     "popup": {
                         "color": "$base00",
-                        "background-color": "$base3"
+                        "background-color": "#00212b"
+                    },
+                    "popup-border": {
+                        "color": "#2aa198",
+                        "background-color": "#00212b"
                     },
                     "scrollbar": {
                         "color": "$base03",
@@ -100,22 +111,24 @@
                         "background-color": "$base02"
                     },
                     "h1": {
-                        "underline": true
+                        "color": "$magenta",
+                        "bold": true
                     },
                     "h2": {
+                        "color": "$magenta",
                         "underline": true
                     },
                     "h3": {
-                        "underline": true
+                        "color": "$magenta"
                     },
                     "h4": {
                         "underline": true
                     },
                     "h5": {
-                        "underline": true
+                        "italic": true
                     },
                     "h6": {
-                        "underline": true
+                        "italic": true
                     },
                     "hr": {
                         "color": "#444"
@@ -171,6 +184,9 @@
                         "color": "#444",
                         "background-color": "#121212"
                     },
+                    "object-key": {
+                        "color": "semantic()"
+                    },
                     "keyword": {
                         "color": "$yellow"
                     },
@@ -206,13 +222,19 @@
                         "color": "$magenta"
                     },
                     "spectrogram-low": {
-                        "background-color": "$green"
+                        "color": "$black",
+                        "background-color": "$green",
+                        "bold": true
                     },
                     "spectrogram-medium": {
-                        "background-color": "$yellow"
+                        "color": "$black",
+                        "background-color": "$yellow",
+                        "bold": true
                     },
                     "spectrogram-high": {
-                        "background-color": "$red"
+                        "color": "$black",
+                        "background-color": "$red",
+                        "bold": true
                     },
                     "file": {
                         "color": "$blue"

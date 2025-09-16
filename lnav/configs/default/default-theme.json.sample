@@ -18,6 +18,39 @@
                     },
                     "error": {
                         "value": "\u2718"
+                    },
+                    "log-level-trace": {
+                        "value": "\uD83C\uDD43"
+                    },
+                    "log-level-debug": {
+                        "value": "\uD83C\uDD33"
+                    },
+                    "log-level-info": {
+                        "value": "\uD83C\uDD38"
+                    },
+                    "log-level-stats": {
+                        "value": "\uD83C\uDD42"
+                    },
+                    "log-level-notice": {
+                        "value": "\uD83C\uDD3D"
+                    },
+                    "log-level-warning": {
+                        "value": "\uD83C\uDD46"
+                    },
+                    "log-level-error": {
+                        "value": "\uD83C\uDD34"
+                    },
+                    "log-level-critical": {
+                        "value": "\uD83C\uDD32"
+                    },
+                    "log-level-fatal": {
+                        "value": "\uD83C\uDD35"
+                    },
+                    "play": {
+                        "value": "\u25b6"
+                    },
+                    "edit": {
+                        "value": "\u270F\uFE0F"
                     }
                 },
                 "vars": {
@@ -35,34 +68,33 @@
                         "background-color": "",
                         "color": "semantic()"
                     },
+                    "fuzzy-match": {
+                        "color": "Olive",
+                        "underline": true,
+                        "bold": true
+                    },
                     "alt-text": {
-                        "background-color": "#262626"
+                        "bold": true
                     },
                     "ok": {
                         "color": "Green",
                         "bold": true
                     },
                     "info": {
-                        "color": "Maroon",
+                        "color": "Silver",
                         "bold": true
                     },
                     "error": {
-                        "color": "Red",
+                        "color": "Maroon",
                         "bold": true
                     },
                     "warning": {
-                        "color": "Yellow",
+                        "color": "Olive",
                         "bold": true
                     },
                     "hidden": {
-                        "color": "Yellow",
+                        "color": "Olive",
                         "bold": true
-                    },
-                    "cursor-line": {
-                        "color": "Cyan1",
-                        "background-color": "Red",
-                        "bold": true,
-                        "underline": true
                     },
                     "disabled-cursor-line": {
                         "color": "Cyan1",
@@ -72,20 +104,25 @@
                         "color": "Maroon"
                     },
                     "skewed-time": {
-                        "color": "Yellow"
+                        "color": "Olive"
                     },
                     "offset-time": {
                         "color": "Teal"
+                    },
+                    "time-column": {
+                        "background-color": "#aaa"
                     },
                     "file-offset": {
                         "color": "Silver"
                     },
                     "invalid-msg": {
-                        "color": "Yellow"
+                        "color": "Olive"
                     },
                     "popup": {
-                        "color": "Silver",
-                        "background-color": "Teal"
+                        "color": "Silver"
+                    },
+                    "popup-border": {
+                        "color": "Purple"
                     },
                     "scrollbar": {
                         "color": "Black",
@@ -124,7 +161,7 @@
                         "underline": true
                     },
                     "list-glyph": {
-                        "color": "Yellow"
+                        "color": "Olive"
                     },
                     "breadcrumb": {
                         "color": "Teal",
@@ -144,7 +181,7 @@
                         "background-color": "#444"
                     },
                     "footnote-border": {
-                        "color": "Blue",
+                        "color": "Navy",
                         "background-color": "#444"
                     },
                     "footnote-text": {
@@ -160,23 +197,22 @@
                 },
                 "syntax-styles": {
                     "inline-code": {
-                        "color": "Red",
-                        "background-color": "#121212"
+                        "color": "Maroon"
                     },
                     "quoted-code": {
-                        "color": "Silver",
-                        "background-color": "#121212"
+                        "color": "Silver"
                     },
                     "code-border": {
-                        "color": "#444",
-                        "background-color": "#121212"
+                        "color": "#444"
+                    },
+                    "object-key": {
+                        "color": "semantic()"
                     },
                     "keyword": {
-                        "color": "#00f"
+                        "color": "Navy"
                     },
                     "string": {
-                        "color": "Green",
-                        "bold": true
+                        "color": "Green"
                     },
                     "comment": {
                         "color": "Green"
@@ -188,16 +224,16 @@
                         "color": "Teal"
                     },
                     "symbol": {
-                        "color": "Blue"
+                        "color": "Navy"
                     },
                     "re-special": {
                         "color": "Teal"
                     },
                     "re-repeat": {
-                        "color": "Yellow"
+                        "color": "Olive"
                     },
                     "diff-delete": {
-                        "color": "Red"
+                        "color": "Maroon"
                     },
                     "diff-add": {
                         "color": "Green"
@@ -206,16 +242,22 @@
                         "color": "Maroon"
                     },
                     "spectrogram-low": {
-                        "background-color": "Green"
+                        "color": "Black",
+                        "background-color": "Green",
+                        "bold": true
                     },
                     "spectrogram-medium": {
-                        "background-color": "Yellow"
+                        "color": "Black",
+                        "background-color": "Olive",
+                        "bold": true
                     },
                     "spectrogram-high": {
-                        "background-color": "Red"
+                        "color": "Black",
+                        "background-color": "Maroon",
+                        "bold": true
                     },
                     "file": {
-                        "color": "Blue"
+                        "color": "Navy"
                     },
                     "null": {
                         "color": "Silver"
@@ -224,7 +266,7 @@
                         "color": "Green"
                     },
                     "non-ascii": {
-                        "color": "Yellow"
+                        "color": "Olive"
                     },
                     "number": {
                         "bold": true
@@ -236,13 +278,13 @@
                         "color": "Silver"
                     },
                     "type": {
-                        "color": "Blue"
+                        "color": "Navy"
                     }
                 },
                 "status-styles": {
                     "title": {
                         "color": "Silver",
-                        "background-color": "Blue",
+                        "background-color": "Navy",
                         "bold": true
                     },
                     "disabled-title": {
@@ -259,11 +301,11 @@
                         "background-color": "Silver"
                     },
                     "warn": {
-                        "color": "Yellow",
+                        "color": "Olive",
                         "background-color": "Silver"
                     },
                     "alert": {
-                        "color": "Red",
+                        "color": "Maroon",
                         "background-color": "Silver"
                     },
                     "active": {
@@ -272,19 +314,19 @@
                     },
                     "info": {
                         "color": "Silver",
-                        "background-color": "Grey37"
+                        "background-color": "Grey53"
                     },
                     "inactive": {
                         "color": "Silver",
-                        "background-color": "Grey37"
+                        "background-color": "Grey53"
                     },
                     "inactive-alert": {
-                        "color": "Red",
-                        "background-color": "Grey37"
+                        "color": "Maroon",
+                        "background-color": "Grey53"
                     },
                     "title-hotkey": {
                         "color": "Teal",
-                        "background-color": "Blue",
+                        "background-color": "Navy",
                         "underline": true
                     },
                     "hotkey": {
@@ -295,16 +337,16 @@
                 },
                 "log-level-styles": {
                     "warning": {
-                        "color": "Yellow"
+                        "color": "Olive"
                     },
                     "error": {
-                        "color": "Red"
+                        "color": "Maroon"
                     },
                     "critical": {
-                        "color": "Red"
+                        "color": "Maroon"
                     },
                     "fatal": {
-                        "color": "Red"
+                        "color": "Maroon"
                     }
                 },
                 "highlights": {

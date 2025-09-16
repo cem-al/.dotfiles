@@ -4,7 +4,15 @@
         "theme-defs": {
             "dracula": {
                 "vars": {
-                    "black": "#282A36",
+                    "background": "#282A36",
+                    "bglighter": "#424450",
+                    "bglight": "#343746",
+                    "bgdark": "#21222C",
+                    "bgdarker": "#191A21",
+                    "foreground": "#F8F8F2",
+                    "selection": "#44475A",
+                    "comment": "#6272A4",
+                    "black": "#21222C",
                     "red": "#FF5555",
                     "green": "#50FA7B",
                     "yellow": "#F1FA8C",
@@ -22,14 +30,19 @@
                         "color": "semantic()"
                     },
                     "text": {
-                        "color": "#f6f6f6",
-                        "background-color": "$black"
+                        "color": "$foreground",
+                        "background-color": "$background"
                     },
                     "selected-text": {
-                        "background-color": "$cyan"
+                        "background-color": "#02778f"
+                    },
+                    "fuzzy-match": {
+                        "color": "$orange",
+                        "underline": true,
+                        "bold": true
                     },
                     "alt-text": {
-                        "background-color": "#1c1c1c"
+                        "background-color": "$bgdarker"
                     },
                     "ok": {
                         "color": "$green",
@@ -53,8 +66,11 @@
                     },
                     "cursor-line": {
                         "color": "$cyan",
-                        "background-color": "#44475A",
+                        "background-color": "$selection",
                         "bold": true
+                    },
+                    "time-column": {
+                        "background-color": "$bglight"
                     },
                     "disabled-cursor-line": {
                         "color": "$cyan",
@@ -84,12 +100,16 @@
                         "background-color": "#333"
                     },
                     "popup": {
-                        "color": "$black",
-                        "background-color": "$cyan"
+                        "color": "$foreground",
+                        "background-color": "$bgdarker"
+                    },
+                    "popup-border": {
+                        "color": "$foreground",
+                        "background-color": "$bgdarker"
                     },
                     "scrollbar": {
-                        "color": "$black",
-                        "background-color": "#888"
+                        "color": "$background",
+                        "background-color": "$foreground"
                     },
                     "h1": {
                         "color": "$purple",
@@ -106,10 +126,10 @@
                         "underline": true
                     },
                     "h5": {
-                        "underline": true
+                        "italic": true
                     },
                     "h6": {
-                        "underline": true
+                        "italic": true
                     },
                     "hr": {
                         "color": "#6272A4"
@@ -132,25 +152,25 @@
                     },
                     "quote-border": {
                         "color": "#666",
-                        "background-color": "#444"
+                        "background-color": "$bgdarker"
                     },
                     "quoted-text": {
                         "color": "$yellow",
-                        "background-color": "#444"
+                        "background-color": "$bgdarker"
                     },
                     "footnote-border": {
                         "color": "$blue",
-                        "background-color": "#444"
+                        "background-color": "$bgdarker"
                     },
                     "footnote-text": {
                         "color": "$cyan",
-                        "background-color": "#444"
+                        "background-color": "$bgdarker"
                     },
                     "snippet-border": {
                         "color": "$cyan"
                     },
                     "indent-guide": {
-                        "color": "#444"
+                        "color": "$bglighter"
                     }
                 },
                 "syntax-styles": {
@@ -166,6 +186,9 @@
                         "color": "#444",
                         "background-color": "#121212"
                     },
+                    "object-key": {
+                        "color": "semantic()"
+                    },
                     "keyword": {
                         "color": "$pink",
                         "bold": true
@@ -175,7 +198,7 @@
                         "bold": true
                     },
                     "comment": {
-                        "color": "#6272A4"
+                        "color": "$comment"
                     },
                     "doc-directive": {
                         "color": "$pink"
@@ -202,13 +225,19 @@
                         "color": "#6272A4"
                     },
                     "spectrogram-low": {
-                        "background-color": "$green"
+                        "color": "$black",
+                        "background-color": "$green",
+                        "bold": true
                     },
                     "spectrogram-medium": {
-                        "background-color": "$yellow"
+                        "color": "$black",
+                        "background-color": "$yellow",
+                        "bold": true
                     },
                     "spectrogram-high": {
-                        "background-color": "$red"
+                        "color": "$black",
+                        "background-color": "$red",
+                        "bold": true
                     },
                     "file": {
                         "color": "$blue"
@@ -269,7 +298,7 @@
                         "background-color": "#353535"
                     },
                     "warn": {
-                        "color": "$yellow",
+                        "color": "$orange",
                         "background-color": "#353535"
                     },
                     "alert": {
@@ -294,7 +323,7 @@
                 },
                 "log-level-styles": {
                     "warning": {
-                        "color": "$yellow"
+                        "color": "$orange"
                     },
                     "error": {
                         "color": "$red"

@@ -6,6 +6,7 @@ return {
   -- font = wezterm.font { family = 'Pragmata Pro Mono' },
   -- font = wezterm.font ( 'Pragmasevka', { weight = 'Medium', }),
   font = wezterm.font('Iosevka Term SS08', { weight = 'Medium' }),
+  font = wezterm.font('Iosevka Term', { weight = 'Medium' }),
   -- font = wezterm.font ( 'TX-02', { weight = 'Light', }),
   -- font = wezterm.font { family = 'Essential PragmataPro' },
   -- font = wezterm.font('Berkeley Mono'),

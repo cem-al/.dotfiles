@@ -21,8 +21,12 @@
                         "bold": true
                     },
                     "text": {
-                        "color": "",
-                        "background-color": ""
+                        "color": "$white",
+                        "background-color": "$black"
+                    },
+                    "fuzzy-match": {
+                        "underline": true,
+                        "bold": true
                     },
                     "alt-text": {
                         "bold": true
@@ -50,12 +54,17 @@
                     "cursor-line": {
                         "color": "#fff",
                         "background-color": "#555",
-                        "bold": true,
-                        "underline": true
+                        "bold": true
                     },
                     "disabled-cursor-line": {
                         "color": "#888",
                         "background-color": "#333"
+                    },
+                    "selected-text": {
+                        "color": "#888"
+                    },
+                    "time-column": {
+                        "background-color": "#444"
                     },
                     "adjusted-time": {
                         "color": "$magenta"
@@ -82,13 +91,14 @@
                     },
                     "popup": {
                         "color": "$plaintext",
-                        "background-color": "#626262"
+                        "background-color": "#424242"
                     },
                     "scrollbar": {
                         "color": "$black",
                         "background-color": "#888"
                     },
                     "h1": {
+                        "bold": true,
                         "underline": true
                     },
                     "h2": {
@@ -101,10 +111,10 @@
                         "underline": true
                     },
                     "h5": {
-                        "underline": true
+                        "italic": true
                     },
                     "h6": {
-                        "underline": true
+                        "italic": true
                     },
                     "hr": {
                         "color": "#444"
@@ -148,6 +158,9 @@
                     }
                 },
                 "syntax-styles": {
+                    "object-key": {
+                        "bold": true
+                    },
                     "comment": {
                         "color": "#888"
                     },

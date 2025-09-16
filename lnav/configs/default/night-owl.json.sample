@@ -16,7 +16,6 @@
                 },
                 "styles": {
                     "identifier": {
-                        "background-color": "#011627",
                         "color": "semantic()"
                     },
                     "text": {
@@ -24,10 +23,15 @@
                         "background-color": "#011627"
                     },
                     "selected-text": {
-                        "background-color": "$cyan"
+                        "background-color": "#4373c2"
+                    },
+                    "fuzzy-match": {
+                        "color": "$yellow",
+                        "underline": true,
+                        "bold": true
                     },
                     "alt-text": {
-                        "background-color": "#1c1c1c"
+                        "background-color": "#15293a"
                     },
                     "ok": {
                         "color": "$green",
@@ -51,13 +55,15 @@
                     },
                     "cursor-line": {
                         "color": "$cyan",
-                        "background-color": "$red",
-                        "bold": true,
-                        "underline": true
+                        "background-color": "#28505d",
+                        "bold": true
                     },
                     "disabled-cursor-line": {
                         "color": "$cyan",
-                        "background-color": "#5f005f"
+                        "background-color": "#18202d"
+                    },
+                    "time-column": {
+                        "background-color": "#112637"
                     },
                     "adjusted-time": {
                         "color": "$magenta"
@@ -83,30 +89,36 @@
                         "background-color": "#333"
                     },
                     "popup": {
-                        "color": "$base00",
-                        "background-color": "$base3"
+                        "color": "#fff",
+                        "background-color": "#011627"
+                    },
+                    "popup-border": {
+                        "color": "#5f7e97",
+                        "background-color": "#011627"
                     },
                     "scrollbar": {
                         "color": "$black",
                         "background-color": "$white"
                     },
                     "h1": {
-                        "underline": true
+                        "color": "$magenta",
+                        "bold": true
                     },
                     "h2": {
+                        "color": "$magenta",
                         "underline": true
                     },
                     "h3": {
-                        "underline": true
+                        "color": "$magenta"
                     },
                     "h4": {
                         "underline": true
                     },
                     "h5": {
-                        "underline": true
+                        "italic": true
                     },
                     "h6": {
-                        "underline": true
+                        "italic": true
                     },
                     "hr": {
                         "color": "#444"
@@ -122,25 +134,25 @@
                         "bold": true
                     },
                     "table-border": {
-                        "color": "#444"
+                        "color": "$blue"
                     },
                     "table-header": {
                         "bold": true
                     },
                     "quote-border": {
-                        "color": "#666",
-                        "background-color": "#444"
+                        "color": "$blue",
+                        "background-color": "#15293a"
                     },
                     "quoted-text": {
-                        "background-color": "#444"
+                        "background-color": "#15293a"
                     },
                     "footnote-border": {
                         "color": "$blue",
-                        "background-color": "#444"
+                        "background-color": "#15293a"
                     },
                     "footnote-text": {
                         "color": "#eee",
-                        "background-color": "#444"
+                        "background-color": "#15293a"
                     },
                     "snippet-border": {
                         "color": "$cyan"
@@ -152,15 +164,18 @@
                 "syntax-styles": {
                     "inline-code": {
                         "color": "$red",
-                        "background-color": "#222"
+                        "background-color": "#15293a"
                     },
                     "quoted-code": {
                         "color": "#eee",
-                        "background-color": "#222"
+                        "background-color": "#15293a"
                     },
                     "code-border": {
-                        "color": "#444",
-                        "background-color": "#222"
+                        "color": "#435362",
+                        "background-color": "#15293a"
+                    },
+                    "object-key": {
+                        "color": "semantic()"
                     },
                     "keyword": {
                         "color": "#c792ea"
@@ -170,7 +185,7 @@
                         "bold": true
                     },
                     "comment": {
-                        "color": "#676e95"
+                        "color": "#5d9899"
                     },
                     "doc-directive": {
                         "color": "#addb67"
@@ -200,13 +215,19 @@
                         "color": "$magenta"
                     },
                     "spectrogram-low": {
-                        "background-color": "$green"
+                        "color": "$black",
+                        "background-color": "$green",
+                        "bold": true
                     },
                     "spectrogram-medium": {
-                        "background-color": "$yellow"
+                        "color": "$black",
+                        "background-color": "$yellow",
+                        "bold": true
                     },
                     "spectrogram-high": {
-                        "background-color": "$red"
+                        "color": "$black",
+                        "background-color": "$red",
+                        "bold": true
                     },
                     "file": {
                         "color": "#82aaff"

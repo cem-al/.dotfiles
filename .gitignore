@@ -2,3 +2,5 @@
 /gh
 /node_modules
 helix/runtime/
+fish_variables
+.local/share/fish/

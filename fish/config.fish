@@ -83,13 +83,6 @@ set -x PATH $PATH $GOPATH/bin
 set --export --prepend PATH "/Users/$HOME/.rd/bin"
 # MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
-# FZF & RIPGREP
-function fzf_rg
-    bash /Users/$HOME/.config/fish/bash/fzf.sh
-end
-
-bind -M insert \cf fzf_rg
-
 # BAT THEME
 export BAT_THEME="Dracula"
 
@@ -153,3 +146,11 @@ alias todo='hx "~/code/notes/todo.md"'
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
+
+# Initialize zoxide
+zoxide init fish | source
+
+# zz to zi for zoxide to open search
+alias zz='zi'
+
+set -gx PATH ~/bin $PATH
