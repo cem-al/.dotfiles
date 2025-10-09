@@ -71,11 +71,3 @@ w = ":write"
 q = ":buffer-close"
 space = "goto_last_accessed_file" 
 z = ":yank-diagnostic"
-
-[keys.normal.g.c]
-p = ":pipe ccase --to pascal"
-c = ":pipe ccase --to camel"
-C = ":pipe ccase --to uppercamel"
-k = ":pipe ccase --to kebab"
-s = ":pipe ccase --to snake"
-S = ":pipe ccase --to screamingsnake"
