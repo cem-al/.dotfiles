@@ -48,5 +48,21 @@ auto-format = true
 
 [[language]]
 name = "php"
+language-servers = ["intelephense", "psalm"]
 auto-format = true
-formatter = { command = "php-cs-fixer", args = ["fix", "--using-cache=no", "-"] }
+
+[language-server.psalm]
+command = "vendor/bin/psalm-language-server"
+
+[language-server.intelephense.config]
+licenceKey = "007ZC8JVEVM35Z9"
+
+[language-server.vscode-json-language-server.config]
+json = { validate = { enable = true }, format = { enable = true } }
+provideFormatter = true
+
+[language-server.vscode-css-language-server.config]
+css = { validate = { enable = true } }
+scss = { validate = { enable = true } }
+less = { validate = { enable = true } }
+provideFormatter = true
