@@ -1,5 +1,8 @@
 os:
   editCommand: 'hx' # as an example
+git:
+  pagers:
+    - pager: delta --dark --paging=never
 # DRACULA
 theme:
   activeBorderColor:
