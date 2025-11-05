@@ -37,14 +37,16 @@ return {
     font_size = 17, -- 27" Screen Medium
     font_size = 18, -- 27" Screen Large
     font_size = 20, -- 27" Screen Large
+    font_size = 22, -- 27" Screen Large
     tab_max_width = 500,
+    tab_bar_at_bottom = false,
     line_height = 1.0,
     use_fancy_tab_bar = false,
     cursor_blink_rate = 0,
     send_composed_key_when_left_alt_is_pressed = false,
     -- Performace settings
     front_end = "WebGpu",
-    max_fps = 144,
+    max_fps = 240,
     colors = {
         copy_mode_active_highlight_fg = {Color = "#ffffff"},
         copy_mode_active_highlight_bg = {Color = "#8787D7"},
@@ -100,7 +102,7 @@ return {
     window_background_opacity = 1,
     pane_focus_follows_mouse = false,
     inactive_pane_hsb = {
-        brightness = 0.5
+        brightness = 0.05
     },
     keys = {
         -- This will create a new split and run your default program inside it
