@@ -7,7 +7,6 @@
 enable-normalization-flatten-containers = false
 enable-normalization-opposite-orientation-for-nested-containers = false
 
-
 # Mouse follows focus when focused monitor changes
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
@@ -33,7 +32,6 @@ cmd-ctrl-alt-shift-tab = 'workspace-back-and-forth'
 cmd-ctrl-alt-shift-quote = 'focus right'
 cmd-ctrl-alt-shift-semicolon = 'focus left'
 
-alt-s = 'layout v_accordion' # 'layout stacking' in i3
 alt-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
 
 alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
@@ -79,25 +77,30 @@ l = 'resize width +50'
 enter = 'mode main'
 esc = 'mode main'
 
-
-
 # Desktop
-
-[[on-window-detected]]
-if.app-id = 'org.mozilla.firefox'      # Firefox
-run = 'move-node-to-workspace 1'       # Browser workspace
 
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'   # WezTerm
 run = 'move-node-to-workspace 1'       # Terminal workspace
 
 [[on-window-detected]]
+if.app-id = "com.mitchellh.ghostty"
+run = [
+  "layout floating",
+  "move-node-to-workspace 1",
+]
+
+[[on-window-detected]]
+if.app-id = 'org.mozilla.firefox'      # Firefox
+run = 'move-node-to-workspace 2'       # Browser workspace
+
+[[on-window-detected]]
 if.app-id = 'com.missiveapp.osx'  # Thunderbird
-run = 'move-node-to-workspace 2'       # Design workspace
+run = 'move-node-to-workspace 3'       # Design workspace
 
 [[on-window-detected]]
 if.app-id = 'com.linear'               # Linear
-run = 'move-node-to-workspace 3'       # Issuesworkspace
+run = 'move-node-to-workspace 4'       # Issuesworkspace
 
 [[on-window-detected]]
 if.app-id = 'com.apple.iCal'           # Calendar
@@ -118,6 +121,7 @@ run = 'move-node-to-workspace 6'       # Design workspace
 [[on-window-detected]]
 if.app-id = 'com.apple.Music'         # Music
 run = 'move-node-to-workspace 7'       # Music workspace
+
 
 
 [gaps]
