@@ -2,6 +2,9 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+# Initialize asdf
+source /opt/homebrew/opt/asdf/libexec/asdf.fish
+
 export EZA_CONFIG_DIR="$HOME/.config/eza"
 export EDITOR="hx"
 export NVM_DEFAULT_VERSION=21
@@ -154,3 +157,9 @@ zoxide init fish | source
 alias zz='zi'
 
 set -gx PATH ~/bin $PATH
+fish_add_path ~/.local/bin
+
+# Copy to clipboard
+bind yy fish_clipboard_copy
+bind Y fish_clipboard_copy
+bind p fish_clipboard_paste
