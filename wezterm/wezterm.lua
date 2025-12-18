@@ -31,6 +31,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     local is_claude = process:find("claude")
 
     if is_claude then
+        local tab_num = tab.tab_index + 1
         -- Check for Claude attention (only colour inactive tabs)
         local claude_attention = pane.user_vars.claude_attention
         if claude_attention and claude_attention ~= "" and not tab.is_active then
@@ -41,7 +42,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
             return {
                 { Background = { Color = bg } },
                 { Foreground = { Color = "#151515" } },
-                { Text = " Claude " },
+                { Text = " " .. tab_num .. ": Claude " },
             }
         end
         -- Claude running, no attention needed - normal colours
@@ -50,7 +51,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
         return {
             { Background = { Color = bg } },
             { Foreground = { Color = fg } },
-            { Text = " Claude " },
+            { Text = " " .. tab_num .. ": Claude " },
         }
     end
 
