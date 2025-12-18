@@ -9,16 +9,42 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     local is_headfirst = cwd and cwd.file_path and cwd.file_path:find("headfirst")
     local is_node_running = process:find("node")
 
+    -- Check if ANY tab has headfirst build script running
+    local build_running_somewhere = false
+    for _, t in ipairs(tabs) do
+        local t_pane = t.active_pane
+        local t_cwd = t_pane.current_working_dir
+        local t_process = t_pane.foreground_process_name or ""
+        local t_is_headfirst = t_cwd and t_cwd.file_path and t_cwd.file_path:find("headfirst")
+        local t_is_node = t_process:find("node")
+        if t_is_headfirst and t_is_node then
+            build_running_somewhere = true
+            break
+        end
+    end
+
     if is_headfirst and is_node_running then
+        -- This tab is running the build script - green
         local bg = tab.is_active and "#00FF00" or "#004000"
         local fg = tab.is_active and "#151515" or "white"
         return {
             { Background = { Color = bg } },
             { Foreground = { Color = fg } },
-            { Text = " HF:Build Script Running " },
+            { Text = " HF:Build Running " },
+        }
+    elseif is_headfirst and not build_running_somewhere then
+        -- This tab is in headfirst but no build script running anywhere - red
+        local bg = tab.is_active and "#FF4444" or "#661111"
+        local fg = "white"
+        return {
+            { Background = { Color = bg } },
+            { Foreground = { Color = fg } },
+            { Text = " HF:Run Build! " },
         }
     end
 end)
+
+
 
 return {
     -- default_prog = {'/Users/cemalokten/.cargo/bin/nu'},
