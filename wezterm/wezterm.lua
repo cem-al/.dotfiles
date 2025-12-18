@@ -27,35 +27,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     local cwd = pane.current_working_dir
     local process = pane.foreground_process_name or ""
 
-    -- Check if Claude is running
-    local is_claude = process:find("claude")
-
-    if is_claude then
-        local tab_num = tab.tab_index + 1
-        -- Check for Claude attention (only colour inactive tabs)
-        local claude_attention = pane.user_vars.claude_attention
-        if claude_attention and claude_attention ~= "" and not tab.is_active then
-            local bg = "#FF8800" -- orange for waiting/permission
-            if claude_attention == "done" then
-                bg = "#00AA00" -- green for done
-            end
-            return {
-                { Background = { Color = bg } },
-                { Foreground = { Color = "#151515" } },
-                { Text = " " .. tab_num .. ": Claude " },
-            }
-        end
-        -- Claude running, no attention needed - normal colours
-        local bg = tab.is_active and "#8787D7" or "#151515"
-        local fg = tab.is_active and "black" or "#8787D7"
-        return {
-            { Background = { Color = bg } },
-            { Foreground = { Color = fg } },
-            { Text = " " .. tab_num .. ": Claude " },
-        }
-    end
-
-    -- Check if in headfirst directory and running node (npm run start)
+    -- Check if in headfirst directory and running node (npm run start) - PRIORITY
     local is_headfirst = cwd and cwd.file_path and cwd.file_path:find("headfirst")
     local is_node_running = process:find("node")
 
@@ -90,6 +62,29 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
             { Background = { Color = bg } },
             { Foreground = { Color = fg } },
             { Text = " HF:Run Build! " },
+        }
+    end
+
+    -- Check if any pane in this tab has Claude attention
+    local claude_attention = nil
+    for _, p in ipairs(tab.panes) do
+        local attention = p.user_vars.claude_attention
+        if attention and attention ~= "" then
+            claude_attention = attention
+            break
+        end
+    end
+
+    -- Check for Claude attention (only colour inactive tabs)
+    if claude_attention and not tab.is_active then
+        local title = tab.tab_title
+        if #title == 0 then
+            title = pane.title
+        end
+        return {
+            { Background = { Color = "#FF8800" } },
+            { Foreground = { Color = "#151515" } },
+            { Text = " " .. title .. " " },
         }
     end
 end)
