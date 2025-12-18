@@ -1,67 +1,9 @@
 local wezterm = require "wezterm"
 
--- Check if Claude needs attention (marker file exists)
-local function claude_needs_attention()
-    local f = io.open("/tmp/claude_needs_attention", "r")
-    if f then
-        f:close()
-        return true
-    end
-    return false
-end
-
--- Clear Claude attention marker
-local function clear_claude_attention()
-    os.remove("/tmp/claude_needs_attention")
-    -- Also clean up any PID-specific markers
-    local handle = io.popen("rm -f /tmp/claude_attention_* 2>/dev/null")
-    if handle then handle:close() end
-end
-
--- Force periodic tab bar refresh when Claude needs attention
-local last_check = 0
-wezterm.on("update-status", function(window, pane)
-    local now = os.time()
-    if now ~= last_check then
-        last_check = now
-        local needs_attention = claude_needs_attention()
-        -- Always set status to force refresh cycle
-        if needs_attention then
-            window:set_right_status(wezterm.format({
-                { Foreground = { Color = "#FF8C00" } },
-                { Text = " ! " },
-            }))
-        else
-            window:set_right_status("")
-        end
-    end
-end)
-
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
     local pane = tab.active_pane
     local cwd = pane.current_working_dir
     local process = pane.foreground_process_name or ""
-
-    -- Check if this tab is running Claude
-    local is_claude = process:find("claude") or process:find("node") and pane.title and pane.title:find("claude")
-
-    -- Check if Claude needs attention
-    if is_claude and claude_needs_attention() then
-        if tab.is_active then
-            -- User is looking at this tab, clear the attention marker
-            clear_claude_attention()
-        else
-            -- Background tab with Claude needing attention - orange background, keep normal title
-            local title = tab.active_pane.title
-            if title and #title > 0 then
-                return {
-                    { Background = { Color = "#FF8C00" } },
-                    { Foreground = { Color = "black" } },
-                    { Text = " " .. title .. " " },
-                }
-            end
-        end
-    end
 
     -- Check if in headfirst directory and running node (npm run start)
     local is_headfirst = cwd and cwd.file_path and cwd.file_path:find("headfirst")
@@ -101,8 +43,6 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
         }
     end
 end)
-
-
 
 return {
     -- default_prog = {'/Users/cemalokten/.cargo/bin/nu'},
