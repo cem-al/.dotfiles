@@ -1,11 +1,32 @@
 local wezterm = require "wezterm"
+
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+    local pane = tab.active_pane
+    local cwd = pane.current_working_dir
+    local process = pane.foreground_process_name or ""
+
+    -- Check if in headfirst directory and running node (npm run start)
+    local is_headfirst = cwd and cwd.file_path and cwd.file_path:find("headfirst")
+    local is_node_running = process:find("node")
+
+    if is_headfirst and is_node_running then
+        local bg = tab.is_active and "#00FF00" or "#004000"
+        local fg = tab.is_active and "#151515" or "white"
+        return {
+            { Background = { Color = bg } },
+            { Foreground = { Color = fg } },
+            { Text = " HF:Build Script Running " },
+        }
+    end
+end)
+
 return {
     -- default_prog = {'/Users/cemalokten/.cargo/bin/nu'},
     color_scheme = "Jellybeans (Gogh)",
-    -- font = wezterm.font('JetBrains Mono', { weight = 'Regular' }),
+    -- font = wezterm.font('JetBrains Mono', { weight = 'Light' }),
     -- font = wezterm.font { family = 'Pragmata Pro Mono' },
     -- font = wezterm.font ( 'Pragmasevka', { weight = 'Medium', }),
-    font = wezterm.font("Iosevka Term SS08"),
+    font = wezterm.font("Iosevka Term SS08", { weight = 'Regular' }),
     -- font = wezterm.font("Iosevka Term", {weight = "Regular"}),
     -- font = wezterm.font("Iosevka Term"),
     -- font = wezterm.font ( 'TX-02', { weight = 'Light', }),
@@ -21,6 +42,7 @@ return {
     freetype_load_flags = "NO_HINTING",
     force_reverse_video_cursor = true,
     term = "xterm-256color",
+    use_ime = false,
     scrollback_lines = 10000,
     -- line_height = 1.25,
     -- cell_width = 1.0,
@@ -102,9 +124,20 @@ return {
     window_background_opacity = 1,
     pane_focus_follows_mouse = false,
     inactive_pane_hsb = {
-        brightness = 0.05
+        brightness = 0.1
     },
     keys = {
+        -- Disable default tab switching to allow Helix to use these keys
+        {
+            key = "[",
+            mods = "CTRL",
+            action = wezterm.action.DisableDefaultAssignment
+        },
+        {
+            key = "]",
+            mods = "CTRL",
+            action = wezterm.action.DisableDefaultAssignment
+        },
         -- This will create a new split and run your default program inside it
         {
             key = "w",
