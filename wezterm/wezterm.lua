@@ -1,7 +1,38 @@
 local wezterm = require "wezterm"
+local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
+
+-- Enable periodic saving every 15 minutes
+resurrect.state_manager.periodic_save()
 
 -- Track which panes we've cleared attention for
 local cleared_panes = {}
+
+-- Generate a consistent colour from a string
+local function hash_to_color(str)
+    local hash = 0
+    for i = 1, #str do
+        hash = (hash * 31 + string.byte(str, i)) % 360
+    end
+    -- Use HSL with fixed saturation/lightness for nice pastel colours
+    local h = hash / 360
+    local s = 0.7
+    local l = 0.7
+    -- HSL to RGB conversion
+    local function hue_to_rgb(p, q, t)
+        if t < 0 then t = t + 1 end
+        if t > 1 then t = t - 1 end
+        if t < 1/6 then return p + (q - p) * 6 * t end
+        if t < 1/2 then return q end
+        if t < 2/3 then return p + (q - p) * (2/3 - t) * 6 end
+        return p
+    end
+    local q = l < 0.5 and l * (1 + s) or l + s - l * s
+    local p = 2 * l - q
+    local r = math.floor(hue_to_rgb(p, q, h + 1/3) * 255)
+    local g = math.floor(hue_to_rgb(p, q, h) * 255)
+    local b = math.floor(hue_to_rgb(p, q, h - 1/3) * 255)
+    return string.format("#%02x%02x%02x", r, g, b)
+end
 
 -- Clear claude_attention when tab becomes active
 wezterm.on("update-status", function(window, pane)
@@ -20,6 +51,15 @@ wezterm.on("update-status", function(window, pane)
         -- Reset the cleared flag when attention is gone
         cleared_panes[pane_id] = nil
     end
+
+    -- Show workspace name in right status with unique colour
+    local workspace = window:active_workspace()
+    local bg_color = hash_to_color(workspace)
+    window:set_right_status(wezterm.format({
+        { Foreground = { Color = "#151515" } },
+        { Background = { Color = bg_color } },
+        { Text = " " .. workspace .. " " },
+    }))
 end)
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
@@ -104,9 +144,12 @@ return {
     -- font = wezterm.font('Berkeley Mono'),
     command_palette_font_size = 25,
     command_palette_font = wezterm.font("Iosevka Term SS08", {weight = "Medium"}),
-    command_palette_bg_color = "#151515", -- Background colour for command palette
-    command_palette_fg_color = "#8787D7", -- Background colour for command palette
+    command_palette_bg_color = "#151515",
+    command_palette_fg_color = "#8787D7",
     command_palette_rows = 10,
+    -- CharSelect / InputSelector styling (resurrect fuzzy loader)
+    char_select_fg_color = "#8787D7",
+    char_select_bg_color = "#151515",
     freetype_load_target = "Normal",
     freetype_load_flags = "NO_HINTING",
     force_reverse_video_cursor = true,
@@ -208,16 +251,6 @@ return {
             action = wezterm.action.DisableDefaultAssignment
         },
         -- This will create a new split and run your default program inside it
-        {
-            key = "w",
-            mods = "SHIFT|CMD",
-            action = wezterm.action.SplitHorizontal {domain = "CurrentPaneDomain"}
-        },
-        {
-            key = "e",
-            mods = "SHIFT|CMD",
-            action = wezterm.action.SplitVertical {domain = "CurrentPaneDomain"}
-        },
         {key = " ", mods = "SHIFT", action = wezterm.action.SendString("_")},
         {
             key = "0",
@@ -226,6 +259,16 @@ return {
                 mode = "SwapWithActive",
                 alphabet = "1234567890"
             }
+        },
+        {
+            key = "e",
+            mods = "CTRL|SHIFT|ALT|CMD",
+            action = wezterm.action.SplitVertical {domain = "CurrentPaneDomain"}
+        },
+        {
+            key = "w",
+            mods = "CTRL|SHIFT|ALT|CMD",
+            action = wezterm.action.SplitHorizontal {domain = "CurrentPaneDomain"}
         },
         {
             key = "w",
@@ -260,6 +303,91 @@ return {
             action = wezterm.action {
                 SendString = "\x1b\r"
             }
-        }
+        },
+        {
+            key = "]",
+            mods = "CTRL|SHIFT|ALT|CMD",
+            action = wezterm.action.SwitchWorkspaceRelative(1)
+        },
+        {
+            key = "[",
+            mods = "CTRL|SHIFT|ALT|CMD",
+            action = wezterm.action.SwitchWorkspaceRelative(-1)
+        },
+        {
+            key = "g",
+            mods = "CTRL|SHIFT|ALT|CMD",
+            action = wezterm.action.PromptInputLine {
+                description = "Enter new workspace name",
+                action = wezterm.action_callback(function(window, pane, line)
+                    if line then
+                        wezterm.mux.rename_workspace(window:active_workspace(), line)
+                    end
+                end)
+            }
+        },
+        -- Resurrect: Save workspace state
+        {
+            key = "s",
+            mods = "CTRL|SHIFT|ALT|CMD",
+            action = wezterm.action_callback(function(win, pane)
+                resurrect.state_manager.save_state(resurrect.workspace_state.get_workspace_state())
+            end),
+        },
+        -- Resurrect: Load state via fuzzy finder
+        {
+            key = "f",
+            mods = "CTRL|SHIFT|ALT|CMD",
+            action = wezterm.action_callback(function(win, pane)
+                resurrect.fuzzy_loader.fuzzy_load(win, pane, function(id, label)
+                    local type = string.match(id, "^([^/]+)") -- match before '/'
+                    id = string.match(id, "([^/]+)$") -- match after '/'
+                    id = string.match(id, "(.+)%..+$") -- remove file extension
+                    if type == "workspace" then
+                        local state = resurrect.state_manager.load_state(id, "workspace")
+                        local workspace_opts = {
+                            relative = true,
+                            restore_text = true,
+                            on_pane_restore = resurrect.tab_state.default_on_pane_restore,
+                            spawn_in_workspace = true,
+                        }
+                        resurrect.workspace_state.restore_workspace(state, workspace_opts)
+                    elseif type == "window" then
+                        local state = resurrect.state_manager.load_state(id, "window")
+                        local window_opts = {
+                            relative = true,
+                            restore_text = true,
+                            on_pane_restore = resurrect.tab_state.default_on_pane_restore,
+                            window = pane:window(),
+                        }
+                        resurrect.window_state.restore_window(pane:window(), state, window_opts)
+                    elseif type == "tab" then
+                        local state = resurrect.state_manager.load_state(id, "tab")
+                        local tab_opts = {
+                            relative = true,
+                            restore_text = true,
+                            on_pane_restore = resurrect.tab_state.default_on_pane_restore,
+                        }
+                        resurrect.tab_state.restore_tab(pane:tab(), state, tab_opts)
+                    end
+                end)
+            end),
+        },
+        -- Resurrect: Delete saved state
+         {
+        key = "d",
+            mods = "CTRL|SHIFT|ALT|CMD",
+        action = wezterm.action_callback(function(win, pane)
+          resurrect.fuzzy_loader.fuzzy_load(win, pane, function(id)
+              resurrect.state_manager.delete_state(id)
+            end,
+            {
+              title = "Delete State",
+              description = "Select State to Delete and press Enter = accept, Esc = cancel, / = filter",
+              fuzzy_description = "Search State to Delete: ",
+              is_fuzzy = true,
+            })
+        end),
+      },
     }
 }
