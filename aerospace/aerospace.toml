@@ -25,8 +25,8 @@ alt-l = 'focus-back-and-forth'
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 cmd-ctrl-alt-shift-equal = 'move left'
 cmd-ctrl-alt-shift-minus = 'move right'
-cmd-ctrl-alt-shift-leftSquareBracket = 'workspace prev'
-cmd-ctrl-alt-shift-rightSquareBracket = 'workspace next'
+# cmd-ctrl-alt-shift-leftSquareBracket = 'workspace prev'
+# cmd-ctrl-alt-shift-rightSquareBracket = 'workspace next'
 
 cmd-ctrl-alt-shift-tab = 'workspace-back-and-forth'
 cmd-ctrl-alt-shift-quote = 'focus right'

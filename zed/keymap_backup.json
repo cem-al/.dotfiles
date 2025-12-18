@@ -1,0 +1,17 @@
+[
+  {
+    "context": "Editor",
+    "bindings": {
+      "space w": "workspace::SaveAll",
+      "space q": "pane::CloseActiveItem",
+      "space b": "tab_switcher::ToggleAll",
+      "space space": "pane::AlternateFile",
+      "] g": "editor::GoToHunk",
+      "[ g": "editor::GoToPrevHunk",
+      "] d": "editor::GoToDiagnostic",
+      "[ d": "editor::GoToPrevDiagnostic",
+      "cmd-ctrl-alt-shift-[": "pane::GoBack",
+      "cmd-ctrl-alt-shift-]": "pane::GoForward"
+    }
+  }
+]

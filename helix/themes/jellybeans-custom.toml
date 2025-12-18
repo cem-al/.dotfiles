@@ -27,7 +27,7 @@
 "string" = "dark_green"
 "string.regexp" = "light_purple"
 "string.special" = { fg = "yellow", modifiers = ["underlined"] } 
-"comment" = "light_gray" 
+"comment" = { fg = "#6d6d6d", modifiers = ["bold"] }
 
 "variable" = { fg = "light_yellow"} 
 "variable.builtin" = { fg = "dark_green", modifiers = ["underlined"] }

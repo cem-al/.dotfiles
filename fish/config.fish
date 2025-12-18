@@ -163,3 +163,4 @@ fish_add_path ~/.local/bin
 bind yy fish_clipboard_copy
 bind Y fish_clipboard_copy
 bind p fish_clipboard_paste
+fish_add_path $HOME/.local/bin

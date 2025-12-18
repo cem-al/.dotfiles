@@ -1,23 +1,153 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run `zed: open default settings` from the
-// command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "agent": {
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-opus-4-5"
+    },
+    "model_parameters": []
+  },
+  "hover_popover_delay": 0,
+  "show_signature_help_after_edits": false,
+  "zoomed_padding": false,
+  "use_system_window_tabs": false,
+  "tabs": {
+    "file_icons": false,
+    "git_status": false
+  },
+  "preview_tabs": {
+    "enable_preview_from_code_navigation": false,
+    "enable_preview_from_file_finder": false,
+    "enabled": false
+  },
+  "title_bar": {
+    "show_project_items": true,
+    "show_branch_name": true,
+    "show_branch_icon": false,
+    "show_menus": false,
+    "show_sign_in": false,
+    "show_user_picture": false,
+    "show_onboarding_banner": false
+  },
+  "status_bar": {
+    "active_language_button": false,
+    "cursor_position_button": false
+  },
+  "diagnostics": {
+    "button": false
+  },
+  "search": {
+    "button": false
+  },
+  "debugger": {
+    "button": false
+  },
+  "edit_predictions": {
+    "mode": "eager"
+  },
+  "vertical_scroll_margin": 30.0,
+  "indent_guides": {
+    "enabled": false
+  },
+  "toolbar": {
+    "agent_review": false,
+    "selections_menu": false,
+    "quick_actions": false,
+    "breadcrumbs": true
+  },
+  "minimap": {
+    "current_line_highlight": "none",
+    "thumb_border": "none",
+    "thumb": "hover"
+  },
+  "scrollbar": {
+    "axes": {
+      "vertical": false,
+      "horizontal": false
+    },
+    "git_diff": true,
+    "cursors": false,
+    "show": "never"
+  },
+  "rounded_selection": false,
+  "cursor_shape": "bar",
+  "helix_mode": true,
+  "theme": "Jellybeans",
+  "ui_font_family": "JetBrains Mono",
+  "buffer_font_family": "Iosevka Term SS08",
+  "ui_font_size": 22,
+  "buffer_font_size": 16,
+  "buffer_font_weight": 400,
+  "buffer_line_height": "standard",
+  "ui_font_weight": 400,
+  "relative_line_numbers": "enabled",
+  "soft_wrap": "editor_width",
+  "tab_bar": {
+    "show_tab_bar_buttons": false,
+    "show_nav_history_buttons": false,
+    "show": false
+  },
   "terminal": {
+    "button": false,
     "dock": "right"
   },
-  "ui_font_size": 16,
-  "buffer_font_size": 15,
-  "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "Jellybeans"
+  "inlay_hints": {
+    "enabled": false
   },
-  "helix_mode": true,
-  "ui_font_family": "Iosevka Term SS08",
-  "buffer_font_family": "Iosevka Term SS08"
+  "format_on_save": "on",
+  "ensure_final_newline_on_save": true,
+  "remove_trailing_whitespace_on_save": true,
+  "cursor_blink": false,
+  "autosave": "off",
+  "sticky_scroll": {
+    "enabled": true,
+    "show": true
+  },
+  "file_finder": {
+    "file_icons": true
+  },
+  "project_panel": {
+    "button": false,
+    "dock": "left",
+    "default_width": 240
+  },
+  "git": {
+    "inline_blame": {
+      "enabled": false
+    },
+    "git_gutter": "tracked_files"
+  },
+  "languages": {
+    "JavaScript": {
+      "formatter": {
+        "external": {
+          "command": "biome",
+          "arguments": ["format", "--stdin-file-path", "{buffer_path}"]
+        }
+      }
+    },
+    "TypeScript": {
+      "formatter": {
+        "external": {
+          "command": "biome",
+          "arguments": ["format", "--stdin-file-path", "{buffer_path}"]
+        }
+      }
+    },
+    "TSX": {
+      "formatter": {
+        "external": {
+          "command": "biome",
+          "arguments": ["format", "--stdin-file-path", "{buffer_path}"]
+        }
+      }
+    },
+    "JSON": {
+      "formatter": {
+        "external": {
+          "command": "biome",
+          "arguments": ["format", "--stdin-file-path", "{buffer_path}"]
+        }
+      }
+    }
+  }
 }

@@ -1,0 +1,92 @@
+{
+  "profiles" : [
+    {
+      "id" : "377A7659-F5A5-4E6C-945C-13FE9E4CA820",
+      "name" : "Default",
+      "workspaces" : [
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.mitchellh.ghostty",
+              "iconPath" : "/Applications/Ghostty.app/Contents/Resources/Ghostty.icns",
+              "name" : "Ghostty"
+            },
+            {
+              "bundleIdentifier" : "com.github.wez.wezterm",
+              "iconPath" : "/Applications/WezTerm.app/Contents/Resources/terminal.icns",
+              "name" : "WezTerm"
+            }
+          ],
+          "assignAppShortcut" : "ctrl+shift+1",
+          "display" : "DELL U2715H",
+          "id" : "98BA2999-45D6-442D-ADEA-1CB3496A397D",
+          "name" : "1",
+          "openAppsOnActivation" : false,
+          "shortcut" : "cmd+ctrl+opt+shift+1"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "org.mozilla.firefox",
+              "iconPath" : "/Applications/Firefox.app/Contents/Resources/firefox.icns",
+              "name" : "Firefox"
+            }
+          ],
+          "assignAppShortcut" : "ctrl+shift+2",
+          "display" : "DELL U2715H",
+          "id" : "499F679C-A062-4490-B121-10997BC3C908",
+          "name" : "2",
+          "openAppsOnActivation" : false,
+          "shortcut" : "cmd+ctrl+opt+shift+2"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.missiveapp.osx",
+              "iconPath" : "/Applications/Missive.app/Contents/Resources/icon.icns",
+              "name" : "Missive"
+            }
+          ],
+          "display" : "DELL U2715H",
+          "id" : "7104B4F7-DFAB-4504-8CFC-4D247521A98A",
+          "name" : "3",
+          "openAppsOnActivation" : false,
+          "shortcut" : "cmd+ctrl+opt+shift+3"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "org.whispersystems.signal-desktop",
+              "iconPath" : "/Applications/Signal.app/Contents/Resources/icon.icns",
+              "name" : "Signal"
+            },
+            {
+              "bundleIdentifier" : "net.whatsapp.WhatsApp",
+              "iconPath" : "/Applications/WhatsApp.app/Contents/Resources/AppIconCatalystRelease.icns",
+              "name" : "‎WhatsApp"
+            }
+          ],
+          "display" : "DELL U2715H",
+          "id" : "036D0517-0C1B-43B6-BCB5-97CD4F088829",
+          "name" : "4",
+          "openAppsOnActivation" : false,
+          "shortcut" : "cmd+ctrl+opt+shift+5"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.figma.Desktop",
+              "iconPath" : "/Applications/Figma.app/Contents/Resources/electron.icns",
+              "name" : "Figma"
+            }
+          ],
+          "display" : "DELL U2715H",
+          "id" : "A9A88E25-E057-437E-90B3-B20942E6F4EB",
+          "name" : "6",
+          "openAppsOnActivation" : false,
+          "shortcut" : "cmd+ctrl+opt+shift+6"
+        }
+      ]
+    }
+  ]
+}
