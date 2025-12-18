@@ -34,6 +34,40 @@ local function hash_to_color(str)
     return string.format("#%02x%02x%02x", r, g, b)
 end
 
+-- This event handler will be called when the custom "close_other_tabs" event is emitted.
+wezterm.on("close_other_tabs", function(window, pane)
+  local mux_window = window:mux_window()
+  local current_tab_id = window:active_tab():tab_id()
+  local tabs_to_close = {}
+
+  -- Collect tab objects for every tab that is not the active one.
+  for _, tab in ipairs(mux_window:tabs()) do
+    if tab:tab_id() ~= current_tab_id then
+      table.insert(tabs_to_close, tab)
+    end
+  end
+
+  -- Close each tab (iterate in reverse to avoid index shifting issues)
+  for i = #tabs_to_close, 1, -1 do
+    tabs_to_close[i]:activate()
+    window:perform_action(wezterm.action.CloseCurrentTab { confirm = false }, pane)
+  end
+
+  -- Re-activate the original tab
+  for _, tab in ipairs(mux_window:tabs()) do
+    if tab:tab_id() == current_tab_id then
+      tab:activate()
+      break
+    end
+  end
+end)
+
+-- return {
+--   keys = {
+--     -- Change this key binding if you prefer a different shortcut.
+--   },
+-- })
+
 -- Clear claude_attention when tab becomes active
 wezterm.on("update-status", function(window, pane)
     local tab = window:active_tab()
@@ -275,6 +309,10 @@ return {
             mods = "CMD",
             action = wezterm.action.CloseCurrentPane {confirm = true}
         },
+        {   key = "w",
+            mods = "CMD|SHIFT",
+            action = wezterm.action{EmitEvent = "close_other_tabs"}
+        },
         {
             key = "m",
             mods = "CTRL|SHIFT|ALT|CMD",
@@ -352,6 +390,7 @@ return {
                             spawn_in_workspace = true,
                         }
                         resurrect.workspace_state.restore_workspace(state, workspace_opts)
+                        wezterm.mux.set_active_workspace(id)
                     elseif type == "window" then
                         local state = resurrect.state_manager.load_state(id, "window")
                         local window_opts = {
@@ -370,24 +409,78 @@ return {
                         }
                         resurrect.tab_state.restore_tab(pane:tab(), state, tab_opts)
                     end
-                end)
+                end, {
+                    fmt_workspace = function(label)
+                        local name = string.match(label, "(.+)%.json$") or label
+                        return wezterm.format({
+                            "ResetAttributes",
+                            { Background = { Color = "#151515" } },
+                            { Foreground = { Color = hash_to_color(name) } },
+                            { Text = " " .. name},
+                        })
+                    end,
+                    fmt_window = function(label)
+                        local name = string.match(label, "(.+)%.json$") or label
+                        return wezterm.format({
+                            "ResetAttributes",
+                            { Foreground = { Color = "#151515" } },
+                            { Background = { Color = hash_to_color(name) } },
+                            { Text = " " .. name},
+                        })
+                    end,
+                    fmt_tab = function(label)
+                        local name = string.match(label, "(.+)%.json$") or label
+                        return wezterm.format({
+                            "ResetAttributes",
+                            { Foreground = { Color = "#151515" } },
+                            { Background = { Color = hash_to_color(name) } },
+                            { Text = " " .. name},
+                        })
+                    end,
+                })
             end),
         },
         -- Resurrect: Delete saved state
-         {
-        key = "d",
+        {
+            key = "d",
             mods = "CTRL|SHIFT|ALT|CMD",
-        action = wezterm.action_callback(function(win, pane)
-          resurrect.fuzzy_loader.fuzzy_load(win, pane, function(id)
-              resurrect.state_manager.delete_state(id)
-            end,
-            {
-              title = "Delete State",
-              description = "Select State to Delete and press Enter = accept, Esc = cancel, / = filter",
-              fuzzy_description = "Search State to Delete: ",
-              is_fuzzy = true,
-            })
-        end),
-      },
+            action = wezterm.action_callback(function(win, pane)
+                resurrect.fuzzy_loader.fuzzy_load(win, pane, function(id)
+                    resurrect.state_manager.delete_state(id)
+                end, {
+                    title = "Delete State",
+                    description = "Select State to Delete and press Enter = accept, Esc = cancel, / = filter",
+                    fuzzy_description = "Search State to Delete: ",
+                    is_fuzzy = true,
+                    fmt_workspace = function(label)
+                        local name = string.match(label, "(.+)%.json$") or label
+                        return wezterm.format({
+                            "ResetAttributes",
+                            { Background = { Color = "#151515" } },
+                            { Foreground = { Color = hash_to_color(name) } },
+                            { Text = " " .. name},
+                        })
+                    end,
+                    fmt_window = function(label)
+                        local name = string.match(label, "(.+)%.json$") or label
+                        return wezterm.format({
+                            "ResetAttributes",
+                            { Foreground = { Color = "#151515" } },
+                            { Background = { Color = hash_to_color(name) } },
+                            { Text = " " .. name},
+                        })
+                    end,
+                    fmt_tab = function(label)
+                        local name = string.match(label, "(.+)%.json$") or label
+                        return wezterm.format({
+                            "ResetAttributes",
+                            { Foreground = { Color = "#151515" } },
+                            { Background = { Color = hash_to_color(name) } },
+                            { Text = " " .. name},
+                        })
+                    end,
+                })
+            end),
+        },
     }
 }
