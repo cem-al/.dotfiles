@@ -1,9 +1,58 @@
 local wezterm = require "wezterm"
 
+-- Track which panes we've cleared attention for
+local cleared_panes = {}
+
+-- Clear claude_attention when tab becomes active
+wezterm.on("update-status", function(window, pane)
+    local tab = window:active_tab()
+    local active_pane = tab:active_pane()
+    local pane_id = active_pane:pane_id()
+    local user_vars = active_pane:get_user_vars()
+
+    -- If this pane has attention and we haven't cleared it yet
+    if user_vars.claude_attention and user_vars.claude_attention ~= "" and not cleared_panes[pane_id] then
+        -- Mark as cleared so we don't spam
+        cleared_panes[pane_id] = true
+        -- Inject the escape sequence to clear the user var
+        active_pane:inject_output('\027]1337;SetUserVar=claude_attention=\007')
+    elseif not user_vars.claude_attention or user_vars.claude_attention == "" then
+        -- Reset the cleared flag when attention is gone
+        cleared_panes[pane_id] = nil
+    end
+end)
+
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
     local pane = tab.active_pane
     local cwd = pane.current_working_dir
     local process = pane.foreground_process_name or ""
+
+    -- Check if Claude is running
+    local is_claude = process:find("claude")
+
+    if is_claude then
+        -- Check for Claude attention (only colour inactive tabs)
+        local claude_attention = pane.user_vars.claude_attention
+        if claude_attention and claude_attention ~= "" and not tab.is_active then
+            local bg = "#FF8800" -- orange for waiting/permission
+            if claude_attention == "done" then
+                bg = "#00AA00" -- green for done
+            end
+            return {
+                { Background = { Color = bg } },
+                { Foreground = { Color = "#151515" } },
+                { Text = " Claude " },
+            }
+        end
+        -- Claude running, no attention needed - normal colours
+        local bg = tab.is_active and "#8787D7" or "#151515"
+        local fg = tab.is_active and "black" or "#8787D7"
+        return {
+            { Background = { Color = bg } },
+            { Foreground = { Color = fg } },
+            { Text = " Claude " },
+        }
+    end
 
     -- Check if in headfirst directory and running node (npm run start)
     local is_headfirst = cwd and cwd.file_path and cwd.file_path:find("headfirst")
