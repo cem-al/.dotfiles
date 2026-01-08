@@ -101,6 +101,14 @@ wezterm.on("update-status", function(window, pane)
         colors = {
             tab_bar = {
                 background = bar_color,
+                active_tab = {
+                    bg_color = "#8787D7",
+                    fg_color = "black",
+                },
+                inactive_tab = {
+                    bg_color = "#151515",
+                    fg_color = "#8787D7",
+                },
             },
         },
     })
