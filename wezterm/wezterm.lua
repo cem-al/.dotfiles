@@ -15,8 +15,8 @@ local function hash_to_color(str)
     end
     -- Use HSL with fixed saturation/lightness for nice pastel colours
     local h = hash / 360
-    local s = 0.7
-    local l = 0.7
+    local s = 0.6
+    local l = 0.6
     -- HSL to RGB conversion
     local function hue_to_rgb(p, q, t)
         if t < 0 then t = t + 1 end
@@ -94,6 +94,15 @@ wezterm.on("update-status", function(window, pane)
         { Background = { Color = bg_color } },
         { Text = " " .. workspace .. " " },
     }))
+
+    -- Set entire tab bar to workspace colour
+    window:set_config_overrides({
+        colors = {
+            tab_bar = {
+                background = bg_color,
+            },
+        },
+    })
 end)
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
@@ -161,6 +170,28 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
             { Text = " " .. title .. " " },
         }
     end
+
+    -- Default: colour tabs based on workspace
+    -- local workspace = wezterm.mux.get_active_workspace()
+    -- local workspace_color = get_workspace_color(workspace) or hash_to_color(workspace)
+    -- local title = tab.tab_title
+    -- if #title == 0 then
+    --     title = pane.title
+    -- end
+
+    -- if tab.is_active then
+    --     return {
+    --         { Background = { Color = workspace_color } },
+    --         { Foreground = { Color = "#151515" } },
+    --         { Text = " " .. title .. " " },
+    --     }
+    -- else
+    --     return {
+    --         { Background = { Color = "#151515" } },
+    --         { Foreground = { Color = workspace_color } },
+    --         { Text = " " .. title .. " " },
+    --     }
+    -- end
 end)
 
 return {
@@ -310,7 +341,7 @@ return {
             action = wezterm.action.CloseCurrentPane {confirm = true}
         },
         {   key = "w",
-            mods = "CMD|SHIFT",
+            mods = "CMD|SHIFT|CTRL",
             action = wezterm.action{EmitEvent = "close_other_tabs"}
         },
         {
@@ -439,7 +470,7 @@ return {
                     end,
                 })
             end),
-        },
+       },
         -- Resurrect: Delete saved state
         {
             key = "d",
