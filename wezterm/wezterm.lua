@@ -8,15 +8,15 @@ resurrect.state_manager.periodic_save()
 local cleared_panes = {}
 
 -- Generate a consistent colour from a string
-local function hash_to_color(str)
+local function hash_to_color(str, lightness)
     local hash = 0
     for i = 1, #str do
         hash = (hash * 31 + string.byte(str, i)) % 360
     end
-    -- Use HSL with fixed saturation/lightness for nice pastel colours
+    -- Use HSL with fixed saturation, configurable lightness
     local h = hash / 360
     local s = 0.6
-    local l = 0.6
+    local l = lightness or 0.6
     -- HSL to RGB conversion
     local function hue_to_rgb(p, q, t)
         if t < 0 then t = t + 1 end
@@ -95,11 +95,12 @@ wezterm.on("update-status", function(window, pane)
         { Text = " " .. workspace .. " " },
     }))
 
-    -- Set entire tab bar to workspace colour
+    -- Set entire tab bar to slightly darker workspace colour
+    local bar_color = hash_to_color(workspace, 0.35)
     window:set_config_overrides({
         colors = {
             tab_bar = {
-                background = bg_color,
+                background = bar_color,
             },
         },
     })
