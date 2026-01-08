@@ -183,7 +183,8 @@
                     "to": [{ "key_code": "f3" }]
                 }
             ],
-            "name": "Advantage2",
+            "name": "A",
+            "selected": true,
             "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         },
         {
@@ -224,8 +225,7 @@
                     ]
                 }
             ],
-            "name": "Macbook",
-            "selected": true,
+            "name": "M",
             "virtual_hid_keyboard": { "keyboard_type_v2": "iso" }
         }
     ]
