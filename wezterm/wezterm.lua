@@ -121,7 +121,8 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 
     -- Check if in headfirst directory and running node (npm run start) - PRIORITY
     local is_headfirst = cwd and cwd.file_path and cwd.file_path:find("headfirst")
-    local is_node_running = process:find("node")
+    local is_playwright = process:find("playwright")
+    local is_node_running = process:find("node") and not is_playwright
 
     -- Check if ANY tab has headfirst build script running
     local build_running_somewhere = false
@@ -130,7 +131,8 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
         local t_cwd = t_pane.current_working_dir
         local t_process = t_pane.foreground_process_name or ""
         local t_is_headfirst = t_cwd and t_cwd.file_path and t_cwd.file_path:find("headfirst")
-        local t_is_node = t_process:find("node")
+        local t_is_playwright = t_process:find("playwright")
+        local t_is_node = t_process:find("node") and not t_is_playwright
         if t_is_headfirst and t_is_node then
             build_running_somewhere = true
             break
@@ -204,13 +206,12 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 end)
 
 return {
-    -- default_prog = {'/Users/cemalokten/.cargo/bin/nu'},
     color_scheme = "Jellybeans (Gogh)",
     -- font = wezterm.font('JetBrains Mono', { weight = 'Light' }),
-    -- font = wezterm.font { family = 'Pragmata Pro Mono' },
+    font = wezterm.font { family = 'Pragmata Pro Mono' },
     -- font = wezterm.font ( 'Pragmasevka', { weight = 'Medium', }),
-    font = wezterm.font("Iosevka Term SS08", { weight = 'Regular' }),
-    -- font = wezterm.font("Iosevka Term", {weight = "Regular"}),
+    font = wezterm.font("Iosevka Term SS08", { weight = 'Light' }),
+    font = wezterm.font("Iosevka Term", {weight = "Light"}),
     -- font = wezterm.font("Iosevka Term"),
     -- font = wezterm.font ( 'TX-02', { weight = 'Light', }),
     -- font = wezterm.font { family = 'Essential PragmataPro' },
@@ -310,7 +311,7 @@ return {
     window_background_opacity = 1,
     pane_focus_follows_mouse = false,
     inactive_pane_hsb = {
-        brightness = 0.1
+        brightness = 0.2
     },
     keys = {
         -- Disable default tab switching to allow Helix to use these keys
@@ -480,6 +481,19 @@ return {
                 })
             end),
        },
+        -- Rename tab
+        {
+            key = "r",
+            mods = "CTRL|SHIFT|ALT|CMD",
+            action = wezterm.action.PromptInputLine {
+                description = "Enter new name for tab",
+                action = wezterm.action_callback(function(window, pane, line)
+                    if line then
+                        window:active_tab():set_title(line)
+                    end
+                end),
+            },
+        },
         -- Resurrect: Delete saved state
         {
             key = "d",
