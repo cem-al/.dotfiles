@@ -116,12 +116,12 @@ run = 'move-node-to-workspace 7'       # Music workspace
 
 
 [gaps]
-inner.horizontal = 0
-inner.vertical =   0
-outer.left =       0
-outer.bottom =     0
-outer.top =        0
-outer.right =      0
+inner.horizontal = 30
+inner.vertical =   30
+outer.left =       30
+outer.bottom =     30
+outer.top =        30
+outer.right =      30
 
 # Laptop
 
