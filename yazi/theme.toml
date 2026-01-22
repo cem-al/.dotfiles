@@ -1,4 +1,4 @@
-[mgr]
+[manager]
 cwd = { fg = "#AC94F4" }
 
 hovered         = { fg = "#000000", bg = "#AC94F4" }
@@ -74,27 +74,14 @@ hovered = { bg = "#504945", bold = true }
 footer  = { fg = "#3c3836", bg = "#a89984" }
 
 [filetype]
-
 rules = [
-    # Images
     { mime = "image/*", fg = "#83a598" },
-
-    # Videos
-    { mime = "video/*", fg = "#b8bb26" },
-    { mime = "audio/*", fg = "#b8bb26" },
-
-
-    { mime = "application/zip",             fg = "#fe8019" },
-    { mime = "application/gzip",            fg = "#fe8019" },
-    { mime = "application/x-tar",           fg = "#fe8019" },
-    { mime = "application/x-bzip",          fg = "#fe8019" },
-    { mime = "application/x-bzip2",         fg = "#fe8019" },
-    { mime = "application/x-7z-compressed", fg = "#fe8019" },
-    { mime = "application/x-rar",           fg = "#fe8019" },
-    { name = "*", fg = "#a89984" },
-    { name = "*/", fg = "#d2c8ff" }
+    { mime = "{audio,video}/*", fg = "#b8bb26" },
+    { mime = "application/{,g}zip", fg = "#fe8019" },
+    { mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "#fe8019" },
+    { url = "*/", fg = "#8787D7" },  # Directories - WezTerm purple
+    { url = "*", fg = "#a89984" },   # All other files
 ]
-
 
 [icon]
 globs = []
