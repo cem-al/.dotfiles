@@ -68,60 +68,91 @@ ctrl-shift-0 = 'move-node-to-workspace 10'
 
 alt-shift-c = 'reload-config'
 
-# Desktop
+# Workspace 1 - Terminal
+[[on-window-detected]]
+if.app-id = 'com.github.wez.wezterm'
+run = 'move-node-to-workspace 1'
+
+# Workspace 2 - Editor & Chrome
+[[on-window-detected]]
+if.app-id = 'dev.zed.Zed'
+run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
-if.app-id = 'com.github.wez.wezterm'   # WezTerm
-run = 'move-node-to-workspace 1'       # Terminal workspace
+if.app-id = 'com.google.Chrome'
+run = 'move-node-to-workspace 2'
+
+# Workspace 3 - Firefox
+[[on-window-detected]]
+if.app-id = 'org.mozilla.firefox'
+run = 'move-node-to-workspace 3'
+
+# Workspace 4 - AI & Notes
+[[on-window-detected]]
+if.app-id = 'com.anthropic.claudefordesktop'
+run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
-if.app-id = "com.mitchellh.ghostty"
-run = [
-  "layout floating",
-  "move-node-to-workspace 1",
-]
+if.app-id = 'com.openai.chat'
+run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
-if.app-id = 'org.mozilla.firefox'      # Firefox
-run = 'move-node-to-workspace 2'       # Browser workspace
+if.app-id = 'com.granola.app'
+run = 'move-node-to-workspace 4'
+
+# Workspace 5 - Communication
+[[on-window-detected]]
+if.app-id = 'org.whispersystems.signal-desktop'
+run = 'move-node-to-workspace 5'
 
 [[on-window-detected]]
-if.app-id = 'com.missiveapp.osx'  # Thunderbird
-run = 'move-node-to-workspace 3'       # Design workspace
+if.app-id = 'net.whatsapp.WhatsApp'
+run = 'move-node-to-workspace 5'
 
 [[on-window-detected]]
-if.app-id = 'com.linear'               # Linear
-run = 'move-node-to-workspace 4'       # Issuesworkspace
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = 'move-node-to-workspace 5'
+
+# Workspace 6 - Design
+[[on-window-detected]]
+if.app-id = 'com.figma.Desktop'
+run = 'move-node-to-workspace 6'
+
+# Workspace 7 - Music
+[[on-window-detected]]
+if.app-id = 'com.apple.Music'
+run = 'move-node-to-workspace 7'
+
+# Workspace 8 - Calendar & Reminders
+[[on-window-detected]]
+if.app-id = 'com.apple.iCal'
+run = 'move-node-to-workspace 8'
 
 [[on-window-detected]]
-if.app-id = 'com.apple.iCal'           # Calendar
-run = 'move-node-to-workspace 4'       
+if.app-id = 'com.apple.reminders'
+run = 'move-node-to-workspace 8'
 
+# Workspace 9 - Database
 [[on-window-detected]]
-if.app-id = "net.whatsapp.WhatsApp"    # Whatsapp
-run = 'move-node-to-workspace 5'       # Communication workspace
+if.app-id = 'com.sequel-ace.sequel-ace'
+run = 'move-node-to-workspace 9'
 
-[[on-window-detected]]
-if.app-id = "org.whispersystems.signal-desktop" #Signal
-run = 'move-node-to-workspace 5'       # Communication workspace
+# Unused - uncomment when needed
+# [[on-window-detected]]
+# if.app-id = 'com.missiveapp.osx'       # Missive
+# run = 'move-node-to-workspace X'
 
-[[on-window-detected]]
-if.app-id = 'com.figma.Desktop'        # Figma
-run = 'move-node-to-workspace 6'       # Design workspace
-
-[[on-window-detected]]
-if.app-id = 'com.apple.Music'         # Music
-run = 'move-node-to-workspace 7'       # Music workspace
-
-
+# [[on-window-detected]]
+# if.app-id = 'com.linear'               # Linear
+# run = 'move-node-to-workspace X'
 
 [gaps]
-inner.horizontal = 30
-inner.vertical =   30
-outer.left =       30
-outer.bottom =     30
-outer.top =        30
-outer.right =      30
+inner.horizontal = 0
+inner.vertical =   0
+outer.left =       0
+outer.bottom =     0
+outer.top =        0
+outer.right =      0
 
 # Laptop
 
