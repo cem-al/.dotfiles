@@ -311,7 +311,7 @@ return {
     window_background_opacity = 1,
     pane_focus_follows_mouse = false,
     inactive_pane_hsb = {
-        brightness = 0.2
+        brightness = 0.6,
     },
     keys = {
         -- Disable default tab switching to allow Helix to use these keys
