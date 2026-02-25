@@ -1,24 +1,29 @@
 [
-  {
-    "context": "Editor",
-    "bindings": {
-      "space w": "workspace::SaveAll",
-      "space q": "pane::CloseActiveItem",
-      "space b": "tab_switcher::ToggleAll",
-      "space tab": "pane::AlternateFile",
-      "] g": "editor::GoToHunk",
-      "[ g": "editor::GoToPreviousHunk",
-      "] d": "editor::GoToDiagnostic",
-      "[ d": "editor::GoToPreviousDiagnostic",
-      "[ [": "pane::GoBack",
-      "] ]": "pane::GoForward",
-      "space /": "pane::DeploySearch",
-      "shift-ctrl-alt-cmd-m": "workspace::ActivateNextPane",
-      "shift-ctrl-alt-cmd-b": "git::Blame",
-      "shift-ctrl-alt-cmd-o": "outline::Toggle",
-      "cmd-shift-w": "pane::SplitRight",
-      "cmd-shift-e": "pane::SplitDown",
-      "escape escape": "buffer_search::Dismiss"
-    }
-  }
+	{
+		"context": "Editor",
+		"bindings": {
+			"ctrl-r": "workspace::ReloadAllItems",
+			"shift-ctrl-alt-cmd-m": "workspace::ActivateNextPane",
+			"shift-ctrl-alt-cmd-b": "git::Blame",
+			"shift-ctrl-alt-cmd-o": "outline::Toggle",
+			"shift-ctrl-alt-cmd-w": "pane::SplitRight",
+			"shift-ctrl-alt-cmd-e": "pane::SplitDown"
+		}
+	},
+	{
+		"context": "Editor && VimControl && !VimWaiting && !menu",
+		"bindings": {
+			"space w": "workspace::SaveAll",
+			"space q": "pane::CloseActiveItem",
+			"space b": "tab_switcher::ToggleAll",
+			"space tab": "pane::AlternateFile",
+			"space /": "pane::DeploySearch",
+			"] g": "editor::GoToHunk",
+			"[ g": "editor::GoToPreviousHunk",
+			"] d": "editor::GoToDiagnostic",
+			"[ d": "editor::GoToPreviousDiagnostic",
+			"[ [": "pane::GoBack",
+			"] ]": "pane::GoForward"
+		}
+	}
 ]
