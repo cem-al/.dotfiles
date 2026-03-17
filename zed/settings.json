@@ -1,4 +1,8 @@
 {
+	"diff_view_style": "unified",
+ "git_panel": {
+		"tree_view": false
+	},
 	"language_models": {
 		"openai": {
 			"api_url": "https://api.openai.com/v1",
@@ -11,7 +15,7 @@
 			]
 		}
 	},
-	"icon_theme": "Zed (Default)",
+	"icon_theme": "Light Charmed Icons",
 	"session": {
 		"trust_all_worktrees": true
 	},
@@ -23,12 +27,12 @@
 	"base_keymap": "Cursor",
 	"agent": {
 		"inline_assistant_model": {
-   "provider": "openai",
-   "model": "gpt-4o",
-   "enable_thinking": false
-  },
-  "dock": "left",
-  "default_model": {
+			"provider": "openai",
+			"model": "gpt-5-codex",
+			"enable_thinking": false
+		},
+		"dock": "left",
+		"default_model": {
 			"provider": "openai",
 			"model": "gpt-4o"
 		},
@@ -64,6 +68,7 @@
 		"button": false
 	},
 	"search": {
+		"center_on_match": true,
 		"button": false
 	},
 	"debugger": {
@@ -99,19 +104,19 @@
 	"rounded_selection": false,
 	"cursor_shape": "bar",
 	"helix_mode": true,
-	"theme": "IR Black",
-	"ui_font_family": "IBM Plex Sans",
+	"theme": "Jellybeans Custom",
+	"ui_font_family": "JetBrains Mono",
 	"buffer_font_family": "Iosevka Term SS08",
-	"ui_font_size": 18.0,
+	"ui_font_size": 17.0,
 	"buffer_font_size": 16.0,
-	"buffer_font_weight": 400.0,
+	"buffer_font_weight": 300.0,
 	"buffer_line_height": "standard",
 	"ui_font_weight": 300.0,
 	"relative_line_numbers": "enabled",
 	"soft_wrap": "editor_width",
 	"tab_bar": {
 		"show_pinned_tabs_in_separate_row": false,
-  "show_tab_bar_buttons": false,
+		"show_tab_bar_buttons": false,
 		"show_nav_history_buttons": false,
 		"show": false
 	},
@@ -135,49 +140,31 @@
 		"file_icons": true
 	},
 	"project_panel": {
-		"button": false,
-		"dock": "right",
+		"button": true,
+		"dock": "left",
 		"default_width": 240
 	},
 	"git": {
 		"inline_blame": {
 			"delay_ms": 0,
-   "enabled": true
+			"enabled": true
 		},
 		"git_gutter": "tracked_files"
 	},
+	"formatter": "auto",
 	"languages": {
-		"JavaScript": {
-			"formatter": {
-				"external": {
-					"command": "biome",
-					"arguments": ["check", "--fix", "--unsafe", "--stdin-file-path", "{buffer_path}"]
-				}
+		"PHP": {
+			"language_servers": ["intelephense", "!phpactor"]
+		}
+	},
+	"lsp": {
+		"intelephense": {
+			"settings": {
+				"licenceKey": "007ZC8JVEVM35Z9"
 			}
 		},
-		"TypeScript": {
-			"formatter": {
-				"external": {
-					"command": "biome",
-					"arguments": ["check", "--fix", "--unsafe", "--stdin-file-path", "{buffer_path}"]
-				}
-			}
-		},
-		"TSX": {
-			"formatter": {
-				"external": {
-					"command": "biome",
-					"arguments": ["check", "--fix", "--unsafe", "--stdin-file-path", "{buffer_path}"]
-				}
-			}
-		},
-		"JSON": {
-			"formatter": {
-				"external": {
-					"command": "biome",
-					"arguments": ["check", "--fix", "--unsafe", "--stdin-file-path", "{buffer_path}"]
-				}
-			}
+		"phpactor": {
+			"disabled": true
 		}
 	}
 }

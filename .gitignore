@@ -4,3 +4,6 @@
 helix/runtime/
 fish_variables
 .local/share/fish/
+.claude/worktrees/
+fish/cache/
+gcloud/

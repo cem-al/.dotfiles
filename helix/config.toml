@@ -1,5 +1,4 @@
-theme = "jellybeans-custom"
-# theme = "flatwhite-custom"
+theme = "jellybeans"
 
 [editor]
 idle-timeout = 0
@@ -9,6 +8,7 @@ true-color = true
 color-modes = true
 scrolloff = 25
 jump-label-alphabet = "jfkdls;aurieowpqnvmcxz"
+rainbow-brackets = true
 
 [editor.lsp]
 display-inlay-hints = false
