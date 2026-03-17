@@ -1,4 +1,4 @@
-theme = "jellybeans"
+theme = "jellybeans-custom"
 
 [editor]
 idle-timeout = 0

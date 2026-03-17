@@ -159,9 +159,7 @@
 	},
 	"lsp": {
 		"intelephense": {
-			"settings": {
-				"licenceKey": "007ZC8JVEVM35Z9"
-			}
+			"settings": {}
 		},
 		"phpactor": {
 			"disabled": true

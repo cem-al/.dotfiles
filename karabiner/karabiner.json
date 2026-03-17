@@ -424,6 +424,7 @@
                 }
             ],
             "name": "A (right cmd disabled)",
+            "selected": true,
             "simple_modifications": [
                 {
                     "from": { "key_code": "right_control" },
@@ -471,7 +472,6 @@
                 }
             ],
             "name": "M",
-            "selected": true,
             "simple_modifications": [
                 {
                     "from": { "key_code": "caps_lock" },

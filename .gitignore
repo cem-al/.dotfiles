@@ -7,3 +7,8 @@ fish_variables
 .claude/worktrees/
 fish/cache/
 gcloud/
+**/.DS_Store
+.mono/
+karabiner/automatic_backups/
+zed/prompts/
+lnav/
