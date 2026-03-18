@@ -1,20 +1,32 @@
 local wezterm = require "wezterm"
--- Load the theme rotator plugin
--- local theme_rotator = wezterm.plugin.require 'https://github.com/koh-sh/wezterm-theme-rotator'
+local scheme = wezterm.color.get_builtin_schemes()["SleepyHollow"]
 
--- Favourite themes:
--- Hybrid 465
--- Homebrew light
--- GruvboxDarkHard
--- Gruvbox dark, soft (base16)
--- Gruvbox dark, pale (base16)
--- Gruvbox Material (Gogh)
--- Paper 699
--- rose pine dawn 775
--- sleepyhollow 823
--- Belafonte Day
--- Kanagawa Dragon (Gogh)
--- Novel
+-- Track which tabs have had a bell fire (for flashing)
+local bell_tabs = {}
+
+wezterm.on('bell', function(window, pane)
+    local tab_id = pane:tab():tab_id()
+    bell_tabs[tab_id] = true
+    -- Flash for 2 seconds then clear
+    wezterm.time.call_after(2, function()
+        bell_tabs[tab_id] = nil
+        window:invalidate()
+    end)
+    window:invalidate()
+    window:toast_notification('Claude Code', 'Task complete', nil, 4000)
+end)
+
+wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
+    local title = tab.active_pane.title
+    local tab_id = tab.tab_id
+    if bell_tabs[tab_id] then
+        return {
+            { Background = { Color = '#e6a003' } },
+            { Foreground = { Color = '#1a1a1a' } },
+            { Text = ' ⚡ ' .. title .. ' ' },
+        }
+    end
+end)
 
 local config = {
     -- color_scheme = "Jellybeans (Gogh)",
@@ -50,33 +62,19 @@ local config = {
     },
     command_palette_font_size = 25,
     command_palette_font = wezterm.font("Iosevka Term SS08", { weight = "Medium" }),
-    -- command_palette_bg_color = "#151515",
-    -- command_palette_fg_color = "#8787D7",
     command_palette_rows = 10,
-    -- char_select_fg_color = "#8787D7",
-    -- char_select_bg_color = "#151515",
-    -- colors = {
-    --     background = "#151515",
-    --     copy_mode_active_highlight_fg = { Color = "#ffffff" },
-    --     copy_mode_active_highlight_bg = { Color = "#8787D7" },
-    --     copy_mode_inactive_highlight_fg = { Color = "White" },
-    --     copy_mode_inactive_highlight_bg = { Color = "Blue" },
-    --     quick_select_label_fg = { Color = "white" },
-    --     quick_select_label_bg = { Color = "Yellow" },
-    --     quick_select_match_fg = { Color = "grey" },
-    --     quick_select_match_bg = { Color = "Yellow" },
-    --     tab_bar = {
-    --         background = "#151515",
-    --         active_tab = {
-    --             bg_color = "#8787D7",
-    --             fg_color = "black",
-    --         },
-    --         inactive_tab = {
-    --             fg_color = "#8787D7",
-    --             bg_color = "#151515",
-    --         },
-    --     },
-    -- },
+    colors = {
+        tab_bar = {
+            active_tab = {
+                bg_color = scheme.brights[4],
+                fg_color = scheme.background,
+            },
+            inactive_tab = {
+                bg_color = scheme.background,
+                fg_color = scheme.foreground,
+            },
+        },
+    },
     window_padding = {
         left = 0,
         right = 0,
@@ -109,15 +107,5 @@ local config = {
         { key = "w", mods = "CTRL|SHIFT|ALT|CMD", action = wezterm.action.SplitHorizontal { domain = "CurrentPaneDomain" } },
     },
 }
-
--- Apply the theme rotator plugin
--- theme_rotator.apply_to_config(config, {
---     next_theme_key = 'v',
---     next_theme_mods = 'CTRL|SHIFT|ALT|CMD',
---     prev_theme_key = 'c',
---     prev_theme_mods = 'CTRL|SHIFT|ALT|CMD',
---     random_theme_key = 'r',
---     random_theme_mods = 'CTRL|SHIFT|ALT|CMD',
--- })
 
 return config

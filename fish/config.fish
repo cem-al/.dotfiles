@@ -28,8 +28,8 @@ if status is-interactive
     alias rm='trash'
     alias L='lazygit'
     alias zz='zi'
-    alias cc='claude'
-    alias ccw='claude --worktree'
+    alias cc='claude --effort max'
+    alias ccw='claude --worktree --effort max'
     alias td='hx ~/code/notes/todo.md'
     alias todo='hx ~/code/notes/todo.md'
 
