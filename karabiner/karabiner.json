@@ -122,6 +122,53 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "Swap square brackets and curly braces",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "open_bracket",
+                                    "modifiers": {
+                                        "mandatory": ["shift"],
+                                        "optional": ["command", "control", "option"]
+                                    }
+                                },
+                                "to": [{ "key_code": "open_bracket" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "open_bracket",
+                                    "modifiers": {
+                                        "optional": ["command", "control", "option"]
+                                    }
+                                },
+                                "to": [{ "key_code": "open_bracket", "modifiers": ["left_shift"] }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "close_bracket",
+                                    "modifiers": {
+                                        "mandatory": ["shift"],
+                                        "optional": ["command", "control", "option"]
+                                    }
+                                },
+                                "to": [{ "key_code": "close_bracket" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "close_bracket",
+                                    "modifiers": {
+                                        "optional": ["command", "control", "option"]
+                                    }
+                                },
+                                "to": [{ "key_code": "close_bracket", "modifiers": ["left_shift"] }],
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },

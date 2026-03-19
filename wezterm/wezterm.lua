@@ -1,43 +1,16 @@
 local wezterm = require "wezterm"
 local scheme = wezterm.color.get_builtin_schemes()["SleepyHollow"]
 
--- Track which tabs have had a bell fire (for flashing)
-local bell_tabs = {}
-
-wezterm.on('bell', function(window, pane)
-    local tab_id = pane:tab():tab_id()
-    bell_tabs[tab_id] = true
-    -- Flash for 2 seconds then clear
-    wezterm.time.call_after(2, function()
-        bell_tabs[tab_id] = nil
-        window:invalidate()
-    end)
-    window:invalidate()
-    window:toast_notification('Claude Code', 'Task complete', nil, 4000)
-end)
-
-wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
-    local title = tab.active_pane.title
-    local tab_id = tab.tab_id
-    if bell_tabs[tab_id] then
-        return {
-            { Background = { Color = '#e6a003' } },
-            { Foreground = { Color = '#1a1a1a' } },
-            { Text = ' ⚡ ' .. title .. ' ' },
-        }
-    end
-end)
-
 local config = {
     -- color_scheme = "Jellybeans (Gogh)",
     -- color_scheme = "Cemal Dark",
-    color_scheme = "SleepyHollow",
     -- color_scheme = "GruvboxDarkHard",
     -- color_scheme = "Gruvbox dark soft (base16)",
     -- color_scheme = "Gruvbox dark pale (base16)",
     -- color_scheme = "Gruvbox Material (Gogh)",
     -- color_scheme = "Rosé Pine Dawn (Gogh)",
     -- color_scheme = "Novel",
+    color_scheme = "SleepyHollow",
     font = wezterm.font("Iosevka Term SS08", { weight = "Regular" }),
     font_size = 18,
     line_height = 1.0,
