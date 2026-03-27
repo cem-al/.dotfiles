@@ -9,6 +9,7 @@ color-modes = true
 scrolloff = 25
 jump-label-alphabet = "jfkdls;aurieowpqnvmcxz"
 rainbow-brackets = true
+auto-format = true
 
 [editor.lsp]
 display-inlay-hints = false

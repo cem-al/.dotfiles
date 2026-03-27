@@ -140,11 +140,14 @@
                             {
                                 "from": {
                                     "key_code": "open_bracket",
-                                    "modifiers": {
-                                        "optional": ["command", "control", "option"]
-                                    }
+                                    "modifiers": { "optional": ["command", "control", "option"] }
                                 },
-                                "to": [{ "key_code": "open_bracket", "modifiers": ["left_shift"] }],
+                                "to": [
+                                    {
+                                        "key_code": "open_bracket",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -161,11 +164,14 @@
                             {
                                 "from": {
                                     "key_code": "close_bracket",
-                                    "modifiers": {
-                                        "optional": ["command", "control", "option"]
-                                    }
+                                    "modifiers": { "optional": ["command", "control", "option"] }
                                 },
-                                "to": [{ "key_code": "close_bracket", "modifiers": ["left_shift"] }],
+                                "to": [
+                                    {
+                                        "key_code": "close_bracket",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
                                 "type": "basic"
                             }
                         ]
@@ -247,7 +253,6 @@
                 }
             ],
             "name": "A",
-            "selected": true,
             "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         },
         {
@@ -488,6 +493,7 @@
                 }
             ],
             "name": "A (right cmd disabled)",
+            "selected": true,
             "simple_modifications": [
                 {
                     "from": { "key_code": "right_control" },
@@ -526,6 +532,7 @@
                         "product_id": 641,
                         "vendor_id": 1452
                     },
+                    "manipulate_caps_lock_led": false,
                     "simple_modifications": [
                         {
                             "from": { "key_code": "caps_lock" },
